@@ -2,5 +2,5 @@ package com.monstar_lab_lifetime.appdemottmon
 
 import kotlin.String
 
-data class MesData(var name: String, var image: Int?,var id:Int) {
+data class MesData(var name: String, var image: Int?) {
 }
