@@ -30,8 +30,6 @@ class MessageFragment : Fragment() {
         view.rcy_mes.layoutManager = LinearLayoutManager(activity)
         view.rcy_mes.setHasFixedSize(true)
         view.rcy_mes.adapter = mAdapter
-
-
         mAdapter.setList(mList)
     }
 
