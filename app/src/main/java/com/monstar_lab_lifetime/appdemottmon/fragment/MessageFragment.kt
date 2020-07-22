@@ -1,4 +1,4 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_message.*
+import com.monstar_lab_lifetime.appdemottmon.adapter.MesAdapter
+import com.monstar_lab_lifetime.appdemottmon.`object`.MesData
+import com.monstar_lab_lifetime.appdemottmon.R
 import kotlinx.android.synthetic.main.fragment_message.view.*
-import kotlinx.android.synthetic.main.item_message.*
-import kotlinx.android.synthetic.main.item_message.view.*
 
 
 class MessageFragment : Fragment() {

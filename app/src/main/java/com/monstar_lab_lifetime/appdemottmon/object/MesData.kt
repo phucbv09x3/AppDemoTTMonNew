@@ -1,4 +1,4 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.`object`
 
 import kotlin.String
 

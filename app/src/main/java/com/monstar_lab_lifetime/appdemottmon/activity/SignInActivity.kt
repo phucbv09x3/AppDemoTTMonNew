@@ -1,4 +1,4 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.activity
 
 import android.app.Activity
 import android.content.Context
@@ -12,6 +12,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import com.monstar_lab_lifetime.appdemottmon.R
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity(),View.OnClickListener {
@@ -106,7 +107,10 @@ class SignInActivity : AppCompatActivity(),View.OnClickListener {
             intentF.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intentF.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intentF)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
         } else if (getemail.isEmpty()) {
             Toast.makeText(this, "Email rỗng ! ", Toast.LENGTH_SHORT)
         } else if (!getemail.matches(mEmail.toRegex())) {
@@ -126,7 +130,10 @@ class SignInActivity : AppCompatActivity(),View.OnClickListener {
 
     fun clicktv(view: View) {
         val intent = Intent(this, SignUpActivity::class.java)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(
+            R.anim.slide_in_right,
+            R.anim.slide_out_left
+        );
         startActivityForResult(intent, REQUEST_CODE)
     }
 

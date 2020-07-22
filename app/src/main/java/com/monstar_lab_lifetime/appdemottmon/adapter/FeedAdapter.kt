@@ -1,17 +1,22 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.monstar_lab_lifetime.appdemottmon.`object`.FeedData
+import com.monstar_lab_lifetime.appdemottmon.Interface.OnItemClick
+import com.monstar_lab_lifetime.appdemottmon.R
 
 class FeedAdapter(var feedList: MutableList<FeedData>, var onItemClick: OnItemClick) :
     RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_feed, parent, false)
-        return FeedViewHolder(v)
+        return FeedViewHolder(
+            v
+        )
     }
 
     override fun getItemCount(): Int {

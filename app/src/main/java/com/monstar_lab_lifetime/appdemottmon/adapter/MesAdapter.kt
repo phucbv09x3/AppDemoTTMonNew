@@ -1,4 +1,4 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.monstar_lab_lifetime.appdemottmon.MesAdapter.MesViewHolder
+import com.monstar_lab_lifetime.appdemottmon.`object`.MesData
+import com.monstar_lab_lifetime.appdemottmon.R
+import com.monstar_lab_lifetime.appdemottmon.adapter.MesAdapter.MesViewHolder
 
 class MesAdapter(
 ) : Adapter<MesViewHolder>() {

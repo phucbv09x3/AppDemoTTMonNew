@@ -1,4 +1,4 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.monstar_lab_lifetime.appdemottmon.activity.ContentActivity
+import com.monstar_lab_lifetime.appdemottmon.adapter.FeedAdapter
+import com.monstar_lab_lifetime.appdemottmon.`object`.FeedData
+import com.monstar_lab_lifetime.appdemottmon.R
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class FeedFragment : Fragment(){
@@ -91,7 +94,11 @@ class FeedFragment : Fragment(){
             )
         )
 
-        val adapte: FeedAdapter = FeedAdapter(mFeedList,activity as ContentActivity )//activity as ContentActivity
+        val adapte: FeedAdapter =
+            FeedAdapter(
+                mFeedList,
+                activity as ContentActivity
+            )//activity as ContentActivity
         rc.adapter = adapte
         return view
     }

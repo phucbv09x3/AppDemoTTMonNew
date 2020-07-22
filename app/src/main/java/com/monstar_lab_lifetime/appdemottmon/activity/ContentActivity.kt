@@ -1,22 +1,30 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.monstar_lab_lifetime.appdemottmon.`object`.FeedData
+import com.monstar_lab_lifetime.appdemottmon.Interface.OnItemClick
+import com.monstar_lab_lifetime.appdemottmon.`object`.MesData
+import com.monstar_lab_lifetime.appdemottmon.R
+import com.monstar_lab_lifetime.appdemottmon.fragment.FeedFragment
+import com.monstar_lab_lifetime.appdemottmon.fragment.MessageFragment
 import kotlinx.android.synthetic.main.activity_content.*
-import kotlinx.android.synthetic.main.activity_sign_in.*
 
-class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
-    private val feedFragment = FeedFragment()
+class ContentActivity : AppCompatActivity(), View.OnClickListener,
+    OnItemClick {
+    private val feedFragment =
+        FeedFragment()
 
     private var fragmentManagerr = supportFragmentManager
-    private var lisFragment = arrayListOf(FeedFragment(), MessageFragment())
-    private val messageFragment = MessageFragment()
+    private var lisFragment = arrayListOf(FeedFragment(),
+        MessageFragment()
+    )
+    private val messageFragment =
+        MessageFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content)
@@ -38,13 +46,15 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
 
         when (v?.id) {
             R.id.imgbtn_home -> {
-
+                imgbtn_home.setImageResource(R.drawable.home_black)
+                imgbtn_mes.setImageResource(R.drawable.ic_group_mes)
 
                 showFrag(lisFragment[0])
 
             }
             R.id.imgbtn_mes -> {
-
+                imgbtn_home.setImageResource(R.drawable.ic_group_7)
+                imgbtn_mes.setImageResource(R.drawable.mes_black)
 
                 showFrag(lisFragment[1])
             }
@@ -111,6 +121,8 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
         var mNumber: Int = -1
         when {
             lisFragment[0].isVisible -> {
+                imgbtn_home.setImageResource(R.drawable.ic_group_7)
+                imgbtn_mes.setImageResource(R.drawable.mes_black)
                 showFrag(lisFragment[1])
                 (lisFragment[1] as? MessageFragment)?.let {
                     it.mList.forEachIndexed { index, mesData ->
@@ -121,7 +133,12 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
                         if (mNumber != -1) {
                             it.mList.removeAt(mNumber)
                         }
-                    it.mList.add(0, MesData(feedData.mName, feedData.mImageProfile))
+                    it.mList.add(0,
+                        MesData(
+                            feedData.mName,
+                            feedData.mImageProfile
+                        )
+                    )
                     it.mAdapter?.setList(it.mList)
                 }
             }

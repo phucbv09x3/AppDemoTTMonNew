@@ -1,4 +1,4 @@
-package com.monstar_lab_lifetime.appdemottmon
+package com.monstar_lab_lifetime.appdemottmon.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import com.monstar_lab_lifetime.appdemottmon.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlin.String
 
@@ -34,7 +35,10 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(
+            R.anim.slide_in_right,
+            R.anim.slide_out_left
+        );
         button_singup.setOnClickListener(this)
         buttonback.setOnClickListener(this)
         hint_passwordsignup.addTextChangedListener(object : TextWatcher{

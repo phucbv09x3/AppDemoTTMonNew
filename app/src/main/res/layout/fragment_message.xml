@@ -7,7 +7,7 @@
     android:weightSum="10"
     android:id="@+id/fragment_mes"
     android:orientation="vertical"
-    tools:context=".MessageFragment">
+    tools:context=".fragment.MessageFragment">
 
     <RelativeLayout
         android:id="@+id/relative"
