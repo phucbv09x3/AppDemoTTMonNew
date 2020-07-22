@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.monstar_lab_lifetime.appdemottmon.activity.ContentActivity
 import com.monstar_lab_lifetime.appdemottmon.adapter.FeedAdapter
-import com.monstar_lab_lifetime.appdemottmon.`object`.FeedData
+import com.monstar_lab_lifetime.appdemottmon.model.FeedData
 import com.monstar_lab_lifetime.appdemottmon.R
 import java.text.SimpleDateFormat
 import java.util.*
