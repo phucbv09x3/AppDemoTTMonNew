@@ -6,25 +6,26 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.monstar_lab_lifetime.appdemottmon.`object`.FeedData
+import com.monstar_lab_lifetime.appdemottmon.model.FeedData
 import com.monstar_lab_lifetime.appdemottmon.Interface.OnItemClick
-import com.monstar_lab_lifetime.appdemottmon.`object`.MesData
+import com.monstar_lab_lifetime.appdemottmon.model.MesData
 import com.monstar_lab_lifetime.appdemottmon.R
 import com.monstar_lab_lifetime.appdemottmon.fragment.FeedFragment
 import com.monstar_lab_lifetime.appdemottmon.fragment.MessageFragment
 import kotlinx.android.synthetic.main.activity_content.*
 
-class ContentActivity : AppCompatActivity(), View.OnClickListener,
-    OnItemClick {
-    private val feedFragment =
-        FeedFragment()
+class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
+    private val feedFragment = FeedFragment()
 
     private var fragmentManagerr = supportFragmentManager
-    private var lisFragment = arrayListOf(FeedFragment(),
+    private var lisFragment = arrayListOf(
+        FeedFragment(),
         MessageFragment()
     )
     private val messageFragment =
         MessageFragment()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content)
@@ -71,7 +72,7 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener,
                 if (it != fragment) fragmentTransaction.hide(it)
             }
         } else {
-            fragmentTransaction.replace(R.id.fr_content, fragment)
+            fragmentTransaction.add(R.id.fr_content, fragment)
         }
         fragmentTransaction.commit()
     }
@@ -130,10 +131,11 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener,
                             mNumber = index
                         }
                     }
-                        if (mNumber != -1) {
-                            it.mList.removeAt(mNumber)
-                        }
-                    it.mList.add(0,
+                    if (mNumber != -1) {
+                        it.mList.removeAt(mNumber)
+                    }
+                    it.mList.add(
+                        0,
                         MesData(
                             feedData.mName,
                             feedData.mImageProfile

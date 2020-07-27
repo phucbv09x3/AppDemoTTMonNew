@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.monstar_lab_lifetime.appdemottmon.`object`.FeedData
+import com.monstar_lab_lifetime.appdemottmon.model.FeedData
 import com.monstar_lab_lifetime.appdemottmon.Interface.OnItemClick
 import com.monstar_lab_lifetime.appdemottmon.R
 

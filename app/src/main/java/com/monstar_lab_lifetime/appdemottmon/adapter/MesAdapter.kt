@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.monstar_lab_lifetime.appdemottmon.`object`.MesData
+import com.monstar_lab_lifetime.appdemottmon.model.MesData
 import com.monstar_lab_lifetime.appdemottmon.R
 import com.monstar_lab_lifetime.appdemottmon.adapter.MesAdapter.MesViewHolder
 

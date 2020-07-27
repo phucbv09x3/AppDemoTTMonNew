@@ -13,6 +13,9 @@ import com.monstar_lab_lifetime.appdemottmon.adapter.MesAdapter
 import com.monstar_lab_lifetime.appdemottmon.model.MesData
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_message.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 
 class MessageFragment : Fragment() {
@@ -49,14 +52,13 @@ class MessageFragment : Fragment() {
             }
 
         }
-
-
         val itemTouchHelper = ItemTouchHelper(myCallback)
         itemTouchHelper.attachToRecyclerView(rcy_mes)
 
         view.rcy_mes.adapter = mAdapter
         mAdapter.setList(mList)
     }
+
 
 
 }

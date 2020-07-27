@@ -10,15 +10,24 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import com.monstar_lab_lifetime.appdemottmon.R
+import com.monstar_lab_lifetime.appdemottmon.database.Account
+import com.monstar_lab_lifetime.appdemottmon.database.AccountDatabase
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.String
+import kotlin.coroutines.CoroutineContext
 
-class SignUpActivity : AppCompatActivity(), View.OnClickListener {
+class SignUpActivity : AppCompatActivity(), View.OnClickListener,CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
     private var mEmail =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private var mPassword = "[a-zA-Z0-9]+[@#$%^&*]+[a-zA-A-z0-9]+"
     private lateinit var sharedPreferences: SharedPreferences
-
+    private var mAccountDatabase: AccountDatabase? = null
     companion object {
         const val PREF_MAIL = "PREF_MAIL"
         const val PREF_PASS = "PREF_PASS"
@@ -26,19 +35,13 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         const val DATA_MAIL = "DATA_MAIL"
         const val DATA_PASS = "DATA_PASS"
     }
-//    companion object {
-//        const val PREF_NAME="PREF_NAME"
-//        const val PREF_MAIL="PREF_MAIL"
-//        const val PREF_PASS="PREF_PASS"
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         overridePendingTransition(
             R.anim.slide_in_right,
             R.anim.slide_out_left
-        );
+        )
         button_singup.setOnClickListener(this)
         buttonback.setOnClickListener(this)
         hint_passwordsignup.addTextChangedListener(object : TextWatcher{
@@ -87,19 +90,29 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.button_singup -> {
-                var getpass: String = hint_passwordsignup.text.toString()
-                var getemail = hint_emailsignup.text.toString()
-                var getfullName = hint_fullName.text.toString()
-                if (!getpass.isEmpty() && getpass.matches(mPassword.toRegex()) && !getemail.isEmpty() && getemail.matches(
+                if (!hint_passwordsignup.text.toString().isEmpty() && hint_passwordsignup.text.toString().matches(mPassword.toRegex()) && ! hint_emailsignup.text.toString().isEmpty()
+                    &&  hint_emailsignup.text.toString().matches(
                         mEmail.toRegex()
-                    ) && !getfullName.isEmpty()
+                    ) && ! hint_fullName.text.toString().isEmpty()
                 ) {
-                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-                    val data = Intent()
-                    data.putExtra(DATA_MAIL, getemail)
-                    data.putExtra(DATA_PASS, getpass)
-                    setResult(Activity.RESULT_OK, data)
-                    finish()
+                    mAccountDatabase = AccountDatabase.getDatabase(this)
+                    var findAcc=mAccountDatabase?.accountDAO()?.findAccountByMail(hint_emailsignup.text.toString())
+                    if (findAcc?.email.equals(hint_emailsignup.text.toString())){
+                        hint_emailsignup.error="Email đã tồn tại !"
+                    }else{
+                        launch {
+                            mAccountDatabase?.accountDAO()?.insertAccount(Account(name = hint_fullName.text.toString()
+                                ,email = hint_emailsignup.text.toString(),password = hint_passwordsignup.text.toString()))
+                        }
+
+                        // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,  "Đăng kí thành công", Toast.LENGTH_SHORT).show()
+                        val data = Intent()
+                        data.putExtra(DATA_MAIL, hint_emailsignup.text.toString())
+                        data.putExtra(DATA_PASS, hint_passwordsignup.text.toString())
+                        setResult(Activity.RESULT_OK, data)
+                        finish()
+                    }
 
 //                    sharedPreferences = this.getSharedPreferences("save_data", Context.MODE_PRIVATE)
 //                    val ed = sharedPreferences.edit()
@@ -109,14 +122,14 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
 //                    ed.putString(PREF_NAME,getfullName)
 //                    ed.commit()
                 } else {
-                    if (getfullName.isEmpty()) {
+                    if ( hint_fullName.text.toString().isEmpty()) {
                         Toast.makeText(this, "Fullname không được trống !", Toast.LENGTH_SHORT)
                             .show()
-                    } else if (getemail.isEmpty()) {
+                    } else if (hint_emailsignup.text.toString().isEmpty()) {
                         Toast.makeText(this, "Email không được trống ! ", Toast.LENGTH_SHORT).show()
-                    } else if (!getemail.matches(mEmail.toRegex())) {
+                    } else if (!hint_emailsignup.text.toString().matches(mEmail.toRegex())) {
                         Toast.makeText(this, "Email sai cú pháp ! ", Toast.LENGTH_SHORT).show()
-                    } else if (!getpass.matches(mPassword.toRegex())) {
+                    } else if (!hint_passwordsignup.text.toString().matches(mPassword.toRegex())) {
                         Toast.makeText(this, "Password chứa kí tự đặc biệt ! ", Toast.LENGTH_SHORT)
                             .show()
                     }

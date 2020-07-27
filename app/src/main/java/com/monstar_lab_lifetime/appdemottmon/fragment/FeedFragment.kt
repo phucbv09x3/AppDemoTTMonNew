@@ -104,7 +104,7 @@ class FeedFragment : Fragment(){
     }
 
 
-    fun getCurrentDate(): kotlin.String {
+    private fun getCurrentDate():String {
         val date = Date()
         val dateFormat = "dd/MM/yyyy hh:mm"
         val sdf = SimpleDateFormat(dateFormat)
