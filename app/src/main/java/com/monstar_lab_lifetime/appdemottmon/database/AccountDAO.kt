@@ -19,6 +19,12 @@ interface AccountDAO {
     fun delete(accountDAO: Account)
 
 
+    @Insert
+    suspend fun insertInbox(messenger: Messenger)
+    @Query("select *from inbox  ")
+    fun getMes():List<Messenger>
 
+    @Query("SELECT * FROM inbox WHERE name=:name")
+    fun findInboxByName(name:String) : Messenger
 
 }

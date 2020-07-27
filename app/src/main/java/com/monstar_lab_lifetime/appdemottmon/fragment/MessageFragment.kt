@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.monstar_lab_lifetime.appdemottmon.R
 import com.monstar_lab_lifetime.appdemottmon.adapter.MesAdapter
+import com.monstar_lab_lifetime.appdemottmon.database.AccountDatabase
 import com.monstar_lab_lifetime.appdemottmon.model.MesData
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_message.view.*
@@ -18,9 +19,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
 
-class MessageFragment : Fragment() {
+class MessageFragment : Fragment(),CoroutineScope {
 
-
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
     var mAdapter = MesAdapter()
     var mList = mutableListOf<MesData>()
     override fun onCreateView(
@@ -54,7 +56,6 @@ class MessageFragment : Fragment() {
         }
         val itemTouchHelper = ItemTouchHelper(myCallback)
         itemTouchHelper.attachToRecyclerView(rcy_mes)
-
         view.rcy_mes.adapter = mAdapter
         mAdapter.setList(mList)
     }

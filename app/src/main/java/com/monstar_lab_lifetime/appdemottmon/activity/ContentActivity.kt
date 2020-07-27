@@ -10,11 +10,19 @@ import com.monstar_lab_lifetime.appdemottmon.model.FeedData
 import com.monstar_lab_lifetime.appdemottmon.Interface.OnItemClick
 import com.monstar_lab_lifetime.appdemottmon.model.MesData
 import com.monstar_lab_lifetime.appdemottmon.R
+import com.monstar_lab_lifetime.appdemottmon.database.AccountDatabase
+import com.monstar_lab_lifetime.appdemottmon.database.Messenger
 import com.monstar_lab_lifetime.appdemottmon.fragment.FeedFragment
 import com.monstar_lab_lifetime.appdemottmon.fragment.MessageFragment
 import kotlinx.android.synthetic.main.activity_content.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
+class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick,CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
     private val feedFragment = FeedFragment()
 
     private var fragmentManagerr = supportFragmentManager
@@ -114,11 +122,8 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
     }
 
     override fun onClicks(feedData: FeedData, position: Int) {
-//        showMes()
-//
-//
-//        messageFragment.mList.add(0, MesData(feedData.mName, feedData.mImageProfile,position))
-//        messageFragment.mAdapter.setList(messageFragment.mList)
+        var mAccountDatabase: AccountDatabase?=null
+        mAccountDatabase= AccountDatabase.getDatabase(this)
         var mNumber: Int = -1
         when {
             lisFragment[0].isVisible -> {
@@ -141,8 +146,17 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick {
                             feedData.mImageProfile
                         )
                     )
+                   // var m=mAccountDatabase.accountDAO().getMes()
+                   // var n= mAccountDatabase.accountDAO().findInboxByName(feedData.mName)
+                    //it.mList.add(MesData(n?.name,n?.image))
                     it.mAdapter?.setList(it.mList)
+                   launch { mAccountDatabase.accountDAO().insertInbox(Messenger(image = feedData.mImageProfile,name = feedData.mName)) }
+
+
                 }
+
+
+
             }
         }
     }

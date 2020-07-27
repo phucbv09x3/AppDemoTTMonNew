@@ -130,7 +130,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener,CoroutineScope 
                     } else if (!hint_emailsignup.text.toString().matches(mEmail.toRegex())) {
                         Toast.makeText(this, "Email sai cú pháp ! ", Toast.LENGTH_SHORT).show()
                     } else if (!hint_passwordsignup.text.toString().matches(mPassword.toRegex())) {
-                        Toast.makeText(this, "Password chứa kí tự đặc biệt ! ", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "Password sai cú pháp ! ", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
