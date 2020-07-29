@@ -151,12 +151,7 @@ class ContentActivity : AppCompatActivity(), View.OnClickListener, OnItemClick,C
                     //it.mList.add(MesData(n?.name,n?.image))
                     it.mAdapter?.setList(it.mList)
                    launch { mAccountDatabase.accountDAO().insertInbox(Messenger(image = feedData.mImageProfile,name = feedData.mName)) }
-
-
                 }
-
-
-
             }
         }
     }
